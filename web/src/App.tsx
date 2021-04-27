@@ -49,17 +49,26 @@ function JsonData() {
   const jsonData = useJsonData()
   const setJsonDataCount = useSetRecoilState(coreState.jsonData);
 
-  const onClick = () => {
+  const onPlus = () => {
     setJsonDataCount({
       count: jsonData.count + 1
+    })
+  }
+  
+  const Minus = () => {
+    setJsonDataCount({
+      count: jsonData.count - 1
     })
   }
   
   return (
     <div>
       <p>You clicked {jsonData.count} times</p>
-      <button onClick={() => onClick()} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-        Click me
+      <button onClick={() => onPlus()} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+        Plus
+      </button>
+      <button onClick={() => Minus()} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+        Minus
       </button>
     </div>
   );
