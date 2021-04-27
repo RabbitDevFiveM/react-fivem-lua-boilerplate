@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
+import "./tailwind.css"
+
+import Slider from './Slider'
 
 import { useVisibility } from './core/hooks/useVisibility';
 import { useCoreService, useDataService } from './core/hooks/useCoreService';
@@ -70,6 +73,7 @@ function App() {
       <h2>Character Count: {count}</h2>
       <JsonData/> 
       <h2>JsonData Count: {jsonData.count}</h2>
+      <Slider/>
     </div>
   );
 }
