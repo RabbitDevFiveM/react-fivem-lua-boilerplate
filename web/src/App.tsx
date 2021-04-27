@@ -17,21 +17,31 @@ const DataForm = () => {
   const setData = useSetRecoilState(coreState.data);
   const setVisibility = useSetRecoilState(coreState.visibility);
 
-  const saveData = () => {
+  const saveData = (e) => {
+    e.preventDefault();
     setData(name);
   };
 
-  const onHide = () => {
+  const onHide = (e) => {
+    e.preventDefault();
     setVisibility(false);
   };
 
-  return(
-      <div>
-        <input value={name} onChange={(event) => setName(event.target.value)}/>
-        <br/>
-        <button onClick={saveData}>Save</button>
-        <button onClick={onHide}>Hide</button>
-      </div>
+  return( 
+    <div className="w-full max-w-xs">
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Username
+          </label>
+          <input value={name} onChange={(event) => setName(event.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"/>
+        </div>
+        <div className="flex items-center justify-between">
+          <button onClick={saveData} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+          <button onClick={onHide} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Hide</button>
+        </div>
+      </form>
+    </div>
   )
 }
 
@@ -48,7 +58,7 @@ function JsonData() {
   return (
     <div>
       <p>You clicked {jsonData.count} times</p>
-      <button onClick={() => onClick()}>
+      <button onClick={() => onClick()} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
         Click me
       </button>
     </div>
