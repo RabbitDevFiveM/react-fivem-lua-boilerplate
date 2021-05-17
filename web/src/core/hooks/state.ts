@@ -14,7 +14,7 @@ export const coreState = {
     default: {
       right: {
         score: 3,
-        logo: "https://media.discordapp.net/attachments/811639071599755304/832920624727851008/023.png?width=468&height=468",
+        logo: "https://media.discordapp.net/attachments/811639071599755304/832920624727851008/023.png",
         star: 1,
       },
       left: {

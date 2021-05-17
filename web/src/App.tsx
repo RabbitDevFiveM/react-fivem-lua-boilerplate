@@ -6,8 +6,8 @@ import { useVisibility } from './core/hooks/useVisibility';
 import { useCoreService, useJsonDataService } from './core/hooks/useCoreService';
 
 import { useJsonData } from './core/hooks/useData';
-
-import { useRecoilValue } from "recoil";
+import { coreState } from './core/hooks/state';
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const createStar = (star) => {
   const elements = [] as  any;
@@ -20,12 +20,42 @@ const createStar = (star) => {
   return elements;
 };
 
+function useInput({ type }) {
+  const [value, setValue] = useState("");
+  const input = <input className="form-input bg-white focus:bg-gray-100 rounded w-full border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value={value} onChange={e => setValue(e.target.value)} type={type} />;
+  return [value, input];
+}
+
 function App() {
   useCoreService()
   const jsonData = useJsonData()
+  const setJsonDataCount = useSetRecoilState(coreState.jsonData);
   const visibility = useVisibility()
 
   const { left, right } = jsonData
+
+  const [leftLogo, urlLeftInput] = useInput({ type: "url" });
+  const [rightLogo, urlRightInput] = useInput({ type: "url" });
+  const [leftScore, leftScoreInput] = useInput({ type: "number" });
+  const [rightScore, rightScoreInput] = useInput({ type: "number" });
+  const [leftStar, leftStarInput] = useInput({ type: "number" });
+  const [rightStar, rightStarInput] = useInput({ type: "number" });
+
+  const demo = (e) => {
+    e.preventDefault();
+    setJsonDataCount({
+      left: {
+        score: leftScore,
+        logo: leftLogo,
+        star: leftStar,
+      },
+      right: {
+        score: rightScore,
+        logo: rightLogo,
+        star: rightStar,
+      },
+    })
+  };
 
   return (
     <div className="container w-full max-w-screen-md mx-auto pt-8 justify-center justify-self-auto" style={ visibility ? { visibility: 'visible' } : { visibility: 'hidden' }}>
@@ -73,6 +103,33 @@ function App() {
               createStar(right.star)
             }
           </div>
+        </div>
+        {/* Control Panel */}
+        <div className="w-full max-w-md absolute bottom-px right-0 box-content p-4 w-1/3">
+          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h1 className="pb-8" style={{ fontWeight: "bold", fontSize: 16 }}>แผงควบคุม</h1>
+            <div>
+              <label>Url Logo ทีมซ้าย:</label>
+              {urlLeftInput}
+              <label>คะแนน ทีมซ้าย:</label>
+              {leftScoreInput}
+              <label>ดาว ทีมซ้าย:</label>
+              {leftStarInput}
+            </div>
+            <div>
+                <label>Url Logo ขวา:</label>
+                {urlRightInput}
+                <label>คะแนน ขวา:</label>
+                {rightScoreInput}
+                <label>ดาว ขวา:</label>
+                {rightStarInput}
+            </div>
+            <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
+              <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button" onClick={demo}>ตัวอย่าง</button>
+              <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button">ยืนยัน</button>
+              <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button">ปิด</button>
+            </div>
+          </form>
         </div>
       </div>
   );
