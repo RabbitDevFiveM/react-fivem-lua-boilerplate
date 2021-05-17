@@ -12,7 +12,16 @@ export const coreState = {
   jsonData: atom<any>({
     key: "jsonState",
     default: {
-      count: 3
+      right: {
+        score: 3,
+        logo: "https://media.discordapp.net/attachments/811639071599755304/832920624727851008/023.png?width=468&height=468",
+        star: 1,
+      },
+      left: {
+        score: 3,
+        logo: "https://cdn.discordapp.com/attachments/775913267079544842/843907074874408990/JAK.png",
+        star: 3,
+      }
     },
   }),
 };
