@@ -61,6 +61,7 @@ function App() {
             </div>
           </div>
         </div>
+        {/* Star */}
         <div className="flex flex-row box-content px-4 h-6 w-full rounded-3xl flex justify-between">
           <div className="flex w-1/2 justify-start">
             {
