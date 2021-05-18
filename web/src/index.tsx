@@ -9,7 +9,7 @@ import { NuiProvider } from 'fivem-nui-react-lib';
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <NuiProvider resource="react-fivem-lua-boilerplate">
+      <NuiProvider resource="rabbit-score">
         <App />
       </NuiProvider>
     </RecoilRoot>

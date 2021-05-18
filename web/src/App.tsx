@@ -9,6 +9,8 @@ import { useJsonData } from './core/hooks/useData';
 import { coreState } from './core/hooks/state';
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import { useNuiRequest } from "fivem-nui-react-lib";
+
 const createStar = (star) => {
   const elements = [] as  any;
   var i = 0
@@ -33,6 +35,8 @@ function App() {
   const visibility = useVisibility()
 
   const { left, right } = jsonData
+
+  const { send } = useNuiRequest();
 
   const [leftLogo, urlLeftInput] = useInput({ type: "url" });
   const [rightLogo, urlRightInput] = useInput({ type: "url" });
@@ -127,7 +131,7 @@ function App() {
             <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
               <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button" onClick={demo}>ตัวอย่าง</button>
               <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button">ยืนยัน</button>
-              <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button">ปิด</button>
+              <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button" onClick={() => send("Close", {})}>ปิด</button>
             </div>
           </form>
         </div>
