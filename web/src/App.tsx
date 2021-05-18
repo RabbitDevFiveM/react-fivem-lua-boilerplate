@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import "./tailwind.css"
 
@@ -44,6 +44,21 @@ function App() {
   const [rightScore, rightScoreInput] = useInput({ type: "number" });
   const [leftStar, leftStarInput] = useInput({ type: "number" });
   const [rightStar, rightStarInput] = useInput({ type: "number" });
+
+  const escFunction = useCallback((event) => {
+    if (event.keyCode === 27) {
+      //Do whatever when esc is pressed
+      send("Close", {})
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
 
   const demo = (e) => {
     e.preventDefault();
