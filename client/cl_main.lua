@@ -1,12 +1,12 @@
--- Example of how it works. Look at the `useCoreService`, and the nui function in `nui-events`
 local focus = false
 local isDead = false
 local showControl = false
+local showUI = false
 Citizen.CreateThread(function()
   while(true) do
       isDead = IsPedDeadOrDying(PlayerPedId())
       if isDead and showControl then
-          close()
+        close()
       end
       Citizen.Wait(500)
   end
@@ -18,37 +18,27 @@ Citizen.CreateThread(
             Citizen.Wait(1)
             if IsControlJustReleased(1, 19) then
               Citizen.Wait(300)
-              if focus then
-                SetNuiFocus( false, false )
-              else
-                SetNuiFocus( true, true )
+              if showUI then
+                if not focus then
+                  SetNuiFocus( true, true )
+                else
+                  SetNuiFocus( false, false )
+                end
+                focus = not focus
               end
-              focus = not focus
+            end
+
+            if IsControlJustReleased(1, 166) then
+              Citizen.Wait(300)
+              if not showUI then
+                show()
+              else
+                close()
+              end
             end
         end
     end
 )
-
-RegisterCommand('score:show', function(source, args, rawCommand)
-  focus = true
-  showControl = true
-  SetNuiFocus( true, true )
-  SendNUIMessage({
-    app = "REACTNUI",
-    method = "setVisibility",
-    data = true
-  })
-end, false)
-
-RegisterCommand('score:hide', function(source, args, rawCommand)
-  focus = false
-  showControl = false
-  SendNUIMessage({
-    app = "REACTNUI",
-    method = "setVisibility",
-    data = false
-  })
-end, false)
 
 RegisterNUICallback("Close", function(data, cb)
   close()
@@ -64,9 +54,22 @@ RegisterNUICallback("Focus", function(data, cb)
   focus = not focus
 end)
 
+function show ()
+  showControl = true
+  focus = true
+  showUI = true
+  SetNuiFocus( true, true )
+  SendNUIMessage({
+    app = "REACTNUI",
+    method = "setVisibility",
+    data = true
+  })
+end
+
 function close ()
   showControl = false
   focus = false
+  showUI = false
   SetNuiFocus( false, false )
   SendNUIMessage({
     app = "REACTNUI",
