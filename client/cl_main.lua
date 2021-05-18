@@ -2,6 +2,7 @@ local focus = false
 local isDead = false
 local showControl = false
 local showUI = false
+
 Citizen.CreateThread(function()
   while(true) do
       isDead = IsPedDeadOrDying(PlayerPedId())
@@ -18,7 +19,7 @@ Citizen.CreateThread(
             Citizen.Wait(1)
             if IsControlJustReleased(1, 19) then
               Citizen.Wait(300)
-              if showUI then
+              if showControl then
                 if not focus then
                   SetNuiFocus( true, true )
                 else
@@ -39,6 +40,37 @@ Citizen.CreateThread(
         end
     end
 )
+
+RegisterNetEvent('rabbit-score:cl:Submit')
+AddEventHandler('rabbit-score:cl:Submit', function(data)
+  if not data.showUi then
+    close()
+  end
+
+  if data.showUi then
+    show()
+    SendNUIMessage({
+      app = "REACTNUI",
+      method = "setJsonData",
+      data = {
+        right={
+          score=data.right.score,
+          logo=data.right.logo,
+          star=data.right.star,
+        },
+        left={
+          score=data.left.score,
+          logo=data.left.logo,
+          star=data.left.star,
+        }
+      }
+    })
+  end
+end)
+
+RegisterNUICallback("Submit", function(data, cb)
+  TriggerServerEvent('rabbit-score:sv:Submit', data)
+end)
 
 RegisterNUICallback("Close", function(data, cb)
   close()

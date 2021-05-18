@@ -11,12 +11,6 @@ export const useCoreService = () => {
   return useVisibility();
 };
 
-export const useDataService = () => {
-  const data = useSetRecoilState(coreState.data);
-  useNuiEvent<boolean>("REACTNUI", "setData", data);
-  return useData();
-};
-
 export const useJsonDataService = () => {
   const jsonData = useSetRecoilState(coreState.jsonData);
   useNuiEvent<boolean>("REACTNUI", "setJsonData", jsonData);

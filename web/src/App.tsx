@@ -30,6 +30,7 @@ function useInput({ type }) {
 
 function App() {
   useCoreService()
+  useJsonDataService()
   const jsonData = useJsonData()
   const setJsonDataCount = useSetRecoilState(coreState.jsonData);
   const visibility = useVisibility()
@@ -73,6 +74,30 @@ function App() {
         logo: rightLogo,
         star: rightStar,
       },
+    })
+  };
+
+  const closeAll = (e) => {
+    e.preventDefault();
+    send("Submit", {
+      showUi: false,
+    })
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    send("Submit", {
+      showUi: true,
+      left: {
+        score: leftScore,
+        logo: leftLogo,
+        star: leftStar,
+      },
+      right: {
+        score: rightScore,
+        logo: rightLogo,
+        star: rightStar,
+      }
     })
   };
 
@@ -145,7 +170,8 @@ function App() {
             </div>
             <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
               <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button" onClick={demo}>ตัวอย่าง</button>
-              <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button">ยืนยัน</button>
+              <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button" onClick={submit}>แสดงทุกคน</button>
+              <button className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded" type="button" onClick={closeAll}>ปิดทุกคน</button>
               <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button" onClick={() => send("Close", {})}>ปิด</button>
             </div>
           </form>
