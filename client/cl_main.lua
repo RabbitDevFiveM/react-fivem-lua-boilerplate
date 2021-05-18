@@ -29,7 +29,7 @@ Citizen.CreateThread(
               end
             end
 
-            if IsControlJustReleased(1, 166) then
+            if IsControlJustReleased(1, 167) then
               Citizen.Wait(300)
               if not showControl then
                 control()
