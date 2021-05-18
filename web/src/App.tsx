@@ -3,7 +3,7 @@ import './App.css';
 import "./tailwind.css"
 
 import { useVisibility } from './core/hooks/useVisibility';
-import { useCoreService, useJsonDataService, controlPanelService } from './core/hooks/useCoreService';
+import { useCoreService, useJsonDataService, useControlPanelService } from './core/hooks/useCoreService';
 
 import { useJsonData, useControlPanel } from './core/hooks/useData';
 import { coreState } from './core/hooks/state';
@@ -31,7 +31,7 @@ function useInput({ type }) {
 function App() {
   useCoreService()
   useJsonDataService()
-  controlPanelService()
+  useControlPanelService()
   const jsonData = useJsonData()
   const controlPanelEnabled = useControlPanel()
   const setJsonDataCount = useSetRecoilState(coreState.jsonData);

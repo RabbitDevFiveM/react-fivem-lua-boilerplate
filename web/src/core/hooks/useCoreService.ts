@@ -11,14 +11,14 @@ export const useCoreService = () => {
   return useVisibility();
 };
 
-export const controlPanelService = () => {
-  const controlPanelEnabled = useSetRecoilState(coreState.controlPanelEnabled);
-  useNuiEvent<boolean>("REACTNUI", "setControlPanel", controlPanelEnabled);
-  return useControlPanel();
-};
-
 export const useJsonDataService = () => {
   const jsonData = useSetRecoilState(coreState.jsonData);
   useNuiEvent<boolean>("REACTNUI", "setJsonData", jsonData);
   return useJsonData();
+};
+
+export const useControlPanelService = () => {
+  const controlPanel = useSetRecoilState(coreState.controlPanel);
+  useNuiEvent<boolean>("REACTNUI", "setControlPanel", controlPanel);
+  return useControlPanel();
 };
