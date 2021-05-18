@@ -105,7 +105,6 @@ end
 
 function show ()
   showUI = true
-  SetNuiFocus( true, true )
   SendNUIMessage({
     app = "REACTNUI",
     method = "setVisibility",
