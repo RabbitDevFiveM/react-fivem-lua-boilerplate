@@ -5,6 +5,10 @@ export const coreState = {
     key: "coreStateHidden",
     default: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
   }),
+  controlPanelEnabled: atom<boolean>({
+    key: "coreControlHidden",
+    default: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
+  }),
   data: atom<any>({
     key: "dataState",
     default: "EmAdthasit",

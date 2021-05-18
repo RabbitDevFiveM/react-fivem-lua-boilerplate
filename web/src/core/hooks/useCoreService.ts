@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 import { useVisibility } from "./useVisibility";
-import { useData, useJsonData } from "./useData";
+import { useJsonData, useControlPanel } from "./useData";
 import { coreState } from "./state";
 import { useNuiEvent } from "fivem-nui-react-lib";
 
@@ -9,6 +9,12 @@ export const useCoreService = () => {
   // You can change these strings to whatever you wish :)
   useNuiEvent<boolean>("REACTNUI", "setVisibility", setShowHide);
   return useVisibility();
+};
+
+export const controlPanelService = () => {
+  const controlPanelEnabled = useSetRecoilState(coreState.controlPanelEnabled);
+  useNuiEvent<boolean>("REACTNUI", "setControlPanel", controlPanelEnabled);
+  return useControlPanel();
 };
 
 export const useJsonDataService = () => {

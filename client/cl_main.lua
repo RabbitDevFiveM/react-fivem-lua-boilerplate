@@ -31,8 +31,8 @@ Citizen.CreateThread(
 
             if IsControlJustReleased(1, 166) then
               Citizen.Wait(300)
-              if not showUI then
-                show()
+              if not showControl then
+                control()
               else
                 close()
               end
@@ -86,9 +86,24 @@ RegisterNUICallback("Focus", function(data, cb)
   focus = not focus
 end)
 
-function show ()
+function control ()
   showControl = true
   focus = true
+  showUI = true
+  SetNuiFocus( true, true )
+  SendNUIMessage({
+    app = "REACTNUI",
+    method = "setVisibility",
+    data = true
+  })
+  SendNUIMessage({
+    app = "REACTNUI",
+    method = "setControlPanel",
+    data = true
+  })
+end
+
+function show ()
   showUI = true
   SetNuiFocus( true, true )
   SendNUIMessage({
@@ -106,6 +121,11 @@ function close ()
   SendNUIMessage({
     app = "REACTNUI",
     method = "setVisibility",
+    data = false
+  })
+  SendNUIMessage({
+    app = "REACTNUI",
+    method = "setControlPanel",
     data = false
   })
 end

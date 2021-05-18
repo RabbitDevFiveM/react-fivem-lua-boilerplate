@@ -3,11 +3,11 @@ import './App.css';
 import "./tailwind.css"
 
 import { useVisibility } from './core/hooks/useVisibility';
-import { useCoreService, useJsonDataService } from './core/hooks/useCoreService';
+import { useCoreService, useJsonDataService, controlPanelService } from './core/hooks/useCoreService';
 
-import { useJsonData } from './core/hooks/useData';
+import { useJsonData, useControlPanel } from './core/hooks/useData';
 import { coreState } from './core/hooks/state';
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import { useNuiRequest } from "fivem-nui-react-lib";
 
@@ -31,7 +31,9 @@ function useInput({ type }) {
 function App() {
   useCoreService()
   useJsonDataService()
+  controlPanelService()
   const jsonData = useJsonData()
+  const controlPanelEnabled = useControlPanel()
   const setJsonDataCount = useSetRecoilState(coreState.jsonData);
   const visibility = useVisibility()
 
@@ -149,7 +151,7 @@ function App() {
           </div>
         </div>
         {/* Control Panel */}
-        <div className="w-full max-w-md absolute bottom-px right-0 box-content p-4 w-1/3">
+        <div style={ controlPanelEnabled ? { visibility: 'visible' } : { visibility: 'hidden' }} className="w-full max-w-md absolute bottom-px right-0 box-content p-4 w-1/3">
           <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <h1 className="pb-8" style={{ fontWeight: "bold", fontSize: 16 }}>แผงควบคุม</h1>
             <div>
