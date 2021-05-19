@@ -37,6 +37,15 @@ Citizen.CreateThread(
                 close()
               end
             end
+
+            if IsControlJustReleased(1, 170) then
+              Citizen.Wait(300)
+              if not showUI then
+                show()
+              else
+                close()
+              end
+            end
         end
     end
 )
