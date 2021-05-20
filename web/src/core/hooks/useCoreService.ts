@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 import { useVisibility } from "./useVisibility";
-import { useJsonData, useControlPanel } from "./useData";
+import { useJsonData, useControlPanel, useShowBanWeapon } from "./useData";
 import { coreState } from "./state";
 import { useNuiEvent } from "fivem-nui-react-lib";
 
@@ -21,4 +21,10 @@ export const useControlPanelService = () => {
   const controlPanel = useSetRecoilState(coreState.controlPanel);
   useNuiEvent<boolean>("REACTNUI", "setControlPanel", controlPanel);
   return useControlPanel();
+};
+
+export const useShowBanWeaponService = () => {
+  const showBanWeapon = useSetRecoilState(coreState.showBanWeapon);
+  useNuiEvent<boolean>("REACTNUI", "setShowBanWeapon", showBanWeapon);
+  return useShowBanWeapon();
 };

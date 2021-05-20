@@ -9,6 +9,10 @@ export const coreState = {
     key: "coreControlHidden",
     default: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
   }),
+  showBanWeapon: atom<boolean>({
+    key: "coreShowBanWeapon",
+    default: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
+  }),
   data: atom<any>({
     key: "dataState",
     default: "EmAdthasit",
@@ -16,6 +20,7 @@ export const coreState = {
   jsonData: atom<any>({
     key: "jsonState",
     default: {
+      weaponBlock: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
       right: {
         score: 3,
         logo: "https://media.discordapp.net/attachments/811639071599755304/832920624727851008/023.png",

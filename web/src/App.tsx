@@ -3,9 +3,9 @@ import './App.css';
 import "./tailwind.css"
 
 import { useVisibility } from './core/hooks/useVisibility';
-import { useCoreService, useJsonDataService, useControlPanelService } from './core/hooks/useCoreService';
+import { useCoreService, useJsonDataService, useControlPanelService, useShowBanWeaponService } from './core/hooks/useCoreService';
 
-import { useJsonData, useControlPanel } from './core/hooks/useData';
+import { useJsonData, useControlPanel, useShowBanWeapon } from './core/hooks/useData';
 import { coreState } from './core/hooks/state';
 import { useSetRecoilState } from "recoil";
 
@@ -32,9 +32,12 @@ function App() {
   useCoreService()
   useJsonDataService()
   useControlPanelService()
+  useShowBanWeaponService()
   const jsonData = useJsonData()
   const controlPanelEnabled = useControlPanel()
+  const showBanWeapon = useShowBanWeapon()
   const setJsonDataCount = useSetRecoilState(coreState.jsonData);
+  const setShowBanWeapon = useSetRecoilState(coreState.showBanWeapon);
   const visibility = useVisibility()
 
   const { left, right } = jsonData
@@ -72,6 +75,7 @@ function App() {
 
   const demo = (e) => {
     e.preventDefault();
+    setShowBanWeapon(true)
     setJsonDataCount({
       left: {
         score: leftScore,
@@ -170,34 +174,40 @@ function App() {
           </div>
         </div>
         {/* Weapon Block */}
-        <div className="absolute bottom-px left-0 inset-y-1/4">
-          <div className="justify-around justify-self-auto flex flex-row pt-2">
-              <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844893556233863198/BAT2.png"/>
-              <h3 className="flex flex-row font-black text-xl pt-3.5 pl-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{left.wood}</h3>
-          </div>
-          <div className="justify-around justify-self-auto flex flex-row pt-2">
-              <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894004252508180/KNUCKLE2.png"/>
-              <h3 className="font-black text-xl pt-3.5 pl-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{left.knuckle}</h3>
-          </div>
-          <div className="justify-around justify-self-auto flex flex-row pt-2">
-              <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894006198534154/MACHETE2.png"/>
-              <h3 className="font-black text-xl pt-3.5 pl-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{left.knife}</h3>
-          </div>
-        </div>
-        <div className="absolute bottom-px right-0 inset-y-1/4">
-          <div className="justify-around justify-self-auto flex flex-row pt-2">
-              <h3 className="font-black text-xl pt-3.5 pr-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{right.wood}</h3>
-              <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844893556233863198/BAT2.png"/>
-          </div>
-          <div className="justify-around justify-self-auto flex flex-row pt-2">
-              <h3 className="font-black text-xl pt-3.5 pr-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{right.knuckle}</h3>
-              <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894004252508180/KNUCKLE2.png"/>
-          </div>
-          <div className="justify-around justify-self-auto flex flex-row pt-2">
-              <h3 className="font-black text-xl pt-3.5 pr-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{right.knife}</h3>
-              <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894006198534154/MACHETE2.png"/>
-          </div>
-        </div>
+        {
+          showBanWeapon && 
+          <>
+            <div className="absolute bottom-px left-0 inset-y-1/4">
+              <div className="justify-around justify-self-auto flex flex-row pt-2">
+                  <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844893556233863198/BAT2.png"/>
+                  <h3 className="flex flex-row font-black text-xl pt-3.5 pl-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{left.wood}</h3>
+              </div>
+              <div className="justify-around justify-self-auto flex flex-row pt-2">
+                  <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894004252508180/KNUCKLE2.png"/>
+                  <h3 className="font-black text-xl pt-3.5 pl-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{left.knuckle}</h3>
+              </div>
+              <div className="justify-around justify-self-auto flex flex-row pt-2">
+                  <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894006198534154/MACHETE2.png"/>
+                  <h3 className="font-black text-xl pt-3.5 pl-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{left.knife}</h3>
+              </div>
+            </div>
+            <div className="absolute bottom-px right-0 inset-y-1/4">
+              <div className="justify-around justify-self-auto flex flex-row pt-2">
+                  <h3 className="font-black text-xl pt-3.5 pr-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{right.wood}</h3>
+                  <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844893556233863198/BAT2.png"/>
+              </div>
+              <div className="justify-around justify-self-auto flex flex-row pt-2">
+                  <h3 className="font-black text-xl pt-3.5 pr-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{right.knuckle}</h3>
+                  <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894004252508180/KNUCKLE2.png"/>
+              </div>
+              <div className="justify-around justify-self-auto flex flex-row pt-2">
+                  <h3 className="font-black text-xl pt-3.5 pr-2 stroke-current text-red-500 text-stroke-2 text-fill-white text-stroke">{right.knife}</h3>
+                  <img className="h-16 w-16 border-2 rounded-full" src="https://cdn.discordapp.com/attachments/775913267079544842/844894006198534154/MACHETE2.png"/>
+              </div>
+            </div>
+
+          </>
+        }
         {/* Control Panel */}
         <div style={ controlPanelEnabled ? { visibility: 'visible' } : { visibility: 'hidden' }} className="w-full max-w-md absolute bottom-px box-content p-4 w-1/3 right-40">
           <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -217,15 +227,15 @@ function App() {
               </div>
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label>แบนไม้</label>
+                  <label>แบนไม้ - L</label>
                   {leftWoodInput}
                 </div>
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label>แบนสนับ</label>
+                  <label>แบนสนับ - L</label>
                   {leftKnuckleInput}
                 </div>
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label>แบนมีด</label>
+                  <label>แบนมีด - L</label>
                   {leftKnifeInput}
                 </div>
               </div>
@@ -245,15 +255,15 @@ function App() {
               </div>
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label>แบนไม้</label>
+                  <label>แบนไม้ - R</label>
                   {rightWoodInput}
                 </div>
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label>แบนสนับ</label>
+                  <label>แบนสนับ - R</label>
                   {rightKnuckleInput}
                 </div>
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label>แบนมีด</label>
+                  <label>แบนมีด - R</label>
                   {rightKnifeInput}
                 </div>
               </div>
@@ -263,6 +273,10 @@ function App() {
               <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button" onClick={submit}>แสดงทุกคน</button>
               <button className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded" type="button" onClick={closeAll}>ปิดทุกคน</button>
               <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button" onClick={() => send("Close", {})}>ปิด</button>
+            </div>
+            <div className="flex flex-row justify-around justify-items-center items-center content-center w-2/3 pt-8">
+              <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button" onClick={() => send("OpenBanWeapon", {})}>แสดงการแบน</button>
+              <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button" onClick={() => send("CloseBanWeapon", {})}>ปิดการแบน</button>
             </div>
           </form>
         </div>
