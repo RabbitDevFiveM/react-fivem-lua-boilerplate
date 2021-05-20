@@ -66,11 +66,17 @@ AddEventHandler('rabbit-score:cl:Submit', function(data)
           score=data.right.score,
           logo=data.right.logo,
           star=data.right.star,
+          star=data.right.wood,
+          star=data.right.knuckle,
+          star=data.right.knife,
         },
         left={
           score=data.left.score,
           logo=data.left.logo,
           star=data.left.star,
+          star=data.left.wood,
+          star=data.left.knuckle,
+          star=data.left.knife,
         }
       }
     })
