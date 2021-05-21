@@ -201,40 +201,42 @@ function App() {
         {
           showBanWeapon && 
           <>
-            <div className="absolute bottom-px left-0 inset-y-1/4 mx-3 bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl h-64">
-                <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
-                    <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844893556233863198/BAT2.png"/>
-                    <h3 className="text-white text-lg pt-1.5 pl-2">{left.wood > 0 ? left.wood : ''}</h3>
-                </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844894004252508180/KNUCKLE2.png"/>
+            <div className="absolute bottom-px left-0 inset-y-1/4 mx-3 bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl h-64 px-1">
+              <h1 className="flex justify-center leading-6 mt-4" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Ban</h1>
+              <div className="justify-around justify-self-auto flex flex-row pt-2 p-1">
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260191154831380/aaa4.png"/>
+                  <h3 className="text-white text-lg pt-1.5 pl-2">{left.wood > 0 ? left.wood : ''}</h3>
+              </div>
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188927131668/aaa2.png"/>
                   <h3 className="text-white text-lg pt-1.5 pl-2 stroke-current text-re  d-500">{left.knuckle > 0 ? left.knuckle : ''}</h3>
               </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844894006198534154/MACHETE2.png"/>
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188356182036/aaa1.png"/>
                   <h3 className="text-white text-lg pt-1.5 pl-2">{left.knife > 0 ? left.knife : ''}</h3>
               </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844938822269665321/BOTTLE.png"/>
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260189749084180/aaa3.png"/>
                   <h3 className="text-white text-lg pt-1.5 pl-2">{left.bottle > 0 ? left.bottle : ''}</h3>
               </div>
             </div>
-            <div className="absolute bottom-px right-0 inset-y-1/4 mx-3 bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl h-64">
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
+            <div className="absolute bottom-px right-0 inset-y-1/4 mx-3 bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl h-64 px-1">
+              <h1 className="flex justify-center leading-6 mt-4" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Ban</h1>
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
                   <h3 className="text-white text-lg pt-1.5 pr-2">{right.wood > 0 ? right.wood : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844893556233863198/BAT2.png"/>
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260191154831380/aaa4.png"/>
               </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
                   <h3 className="text-white text-lg pt-1.5 pr-2">{right.knuckle > 0 ? right.knuckle : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844894004252508180/KNUCKLE2.png"/>
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188927131668/aaa2.png"/>
               </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
                   <h3 className="text-white text-lg pt-1.5 pr-2">{right.knife > 0 ? right.knife : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844894006198534154/MACHETE2.png"/>
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188356182036/aaa1.png"/>
               </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-2.5 mt-1">
+              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
                   <h3 className="text-white text-lg pt-1.5 pr-2">{right.bottle > 0 ? right.bottle : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/775913267079544842/844938822269665321/BOTTLE.png"/>
+                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260189749084180/aaa3.png"/>
               </div>
             </div>
 
