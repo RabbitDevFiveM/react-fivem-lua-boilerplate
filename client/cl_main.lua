@@ -92,7 +92,14 @@ RegisterNUICallback("Submit", function(data, cb)
 end)
 
 RegisterNUICallback("Close", function(data, cb)
-  close()
+  SetNuiFocus( false, false )
+  showControl = false
+  focus = false
+  SendNUIMessage({
+    app = "REACTNUI",
+    method = "setControlPanel",
+    data = false
+  })
   cb('OK')
 end)
 

@@ -60,6 +60,9 @@ function App() {
   const [rightKnife, rightKnifeInput] = useInput({ type: "number", defaultValue: 0 });
   const [rightBottle, rightBottleInput] = useInput({ type: "number", defaultValue: 0 });
 
+  const [statusShowUI, setStatusShowUI] = useState(false);
+  const [statusShowBanWeapon, setStatusShowBanWeapon] = useState(false);
+
   const escFunction = useCallback((event) => {
     if (event.keyCode === 27) {
       //Do whatever when esc is pressed
@@ -100,7 +103,21 @@ function App() {
     })
   };
 
+  const openBanWeapon = (e) => {
+    setStatusShowBanWeapon(true)
+    e.preventDefault();
+    send("OpenBanWeapon")
+  };
+
+  const closeBanWeapon = (e) => {
+    setStatusShowBanWeapon(false)
+    e.preventDefault();
+    send("CloseBanWeapon")
+  };
+
   const closeAll = (e) => {
+    setStatusShowUI(false)
+    setStatusShowBanWeapon(false)
     e.preventDefault();
     send("Submit", {
       showUi: false,
@@ -108,6 +125,7 @@ function App() {
   };
 
   const submit = (e) => {
+    setStatusShowUI(true)
     e.preventDefault();
     send("Submit", {
       showUi: true,
@@ -292,13 +310,14 @@ function App() {
             </div>
             <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
               <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button" onClick={demo}>ตัวอย่าง</button>
-              <button className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" type="button" onClick={submit}>แสดงทุกคน</button>
-              <button className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded" type="button" onClick={closeAll}>ปิดทุกคน</button>
+              {/* <div className={`banner ${active ? "active" : ""}`}>{children}</div> */}
+              <button className={`bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded ${statusShowUI && "ring ring-green-200"}`} type="button" onClick={submit}>แสดงทุกคน</button>
+              <button className={`bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded ${!statusShowUI && "ring ring-yellow-200"}`} type="button" onClick={closeAll}>ปิดทุกคน</button>
               <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button" onClick={() => send("Close", {})}>ปิด</button>
             </div>
             <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
-              <button className="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 border-b-4 border-green-800 hover:border-green-600 rounded" type="button" onClick={() => send("OpenBanWeapon", {})}>แสดงการแบนทุกคน</button>
-              <button className="bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4 border-b-4 border-red-600 hover:border-red-400 rounded" type="button" onClick={() => send("CloseBanWeapon", {})}>ปิดแสดงการแบนทุกคน</button>
+              <button className={`bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 border-b-4 border-green-800 hover:border-green-600 rounded ${statusShowBanWeapon && "ring ring-green-300"}`} type="button" onClick={openBanWeapon}>แสดงการแบนทุกคน</button>
+              <button className={`bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4 border-b-4 border-red-600 hover:border-red-400 rounded ${!statusShowBanWeapon && "ring ring-red-300"}`} type="button" onClick={closeBanWeapon}>ปิดแสดงการแบนทุกคน</button>
             </div>
           </form>
         </div>
