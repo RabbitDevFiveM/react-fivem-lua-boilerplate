@@ -28,6 +28,7 @@ export const coreState = {
         wood: 0,
         knuckle: 0,
         knife: 0,
+        bottle: 0,
       },
       left: {
         score: 3,
@@ -36,6 +37,7 @@ export const coreState = {
         wood: 0,
         knuckle: 0,
         knife: 0,
+        bottle: 0,
       }
     },
   }),

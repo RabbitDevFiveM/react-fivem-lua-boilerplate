@@ -71,6 +71,7 @@ AddEventHandler('rabbit-score:cl:Submit', function(data)
           wood=data.right.wood,
           knuckle=data.right.knuckle,
           knife=data.right.knife,
+          bottle=data.right.bottle,
         },
         left={
           score=data.left.score,
@@ -79,6 +80,7 @@ AddEventHandler('rabbit-score:cl:Submit', function(data)
           wood=data.left.wood,
           knuckle=data.left.knuckle,
           knife=data.left.knife,
+          bottle=data.left.bottle,
         }
       }
     })
