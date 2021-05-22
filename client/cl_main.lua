@@ -7,3 +7,11 @@ RegisterCommand('show:nui', function(source, args, rawCommand)
     data = true
   })
 end, false)
+
+RegisterCommand('close:nui', function(source, args, rawCommand)
+  SendNUIMessage({
+    app = "REACTNUI",
+    method = "setVisibility",
+    data = false
+  })
+end, false)
