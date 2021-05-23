@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './App.css';
 
 // show and hide
@@ -30,9 +30,11 @@ function App() {
 
   
   return (
-    <div style={ visibility ? { visibility: 'visible' } : { visibility: 'hidden' }}>
-     {/** Any types of components goes here. Maybe some routing? */}
-      <h1 style={{ color: 'black'}}>FiveM React Boilerplate</h1>
+    <div className="container w-full max-w-screen-md mx-auto pt-8 justify-center justify-self-auto" style={ visibility ? { visibility: 'visible' } : { visibility: 'hidden' }}>
+      <div className="box-content justify-center justify-self-auto h-12 w-full p-4 border-2 rounded-3xl flex justify-between bg-gradient-to-r from-gray-800 to-black">
+        <h1 className="text-white">FiveM React Boilerplate</h1>
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button">Example</button>
+      </div>
     </div>
   );
 }
