@@ -167,7 +167,7 @@ function App() {
           {/* Center */}
           <div className="flex flex-col justify-center justify-items-center items-center content-center w-1/2">
             <h1 className="flex justify-center leading-6" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Crown of King 2021</h1>
-            <h1 className="flex justify-center leading-6" style={{ fontSize: 26, fontWeight: "bold", color: '#FFF'}}>Qualifiers Day 5</h1>
+            <h1 className="flex justify-center leading-6" style={{ fontSize: 26, fontWeight: "bold", color: '#FFF'}}>Qualifiers Day 6</h1>
             <h1 className="flex justify-center leading-6" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Familie City</h1>
           </div>
           {/* Right */}
