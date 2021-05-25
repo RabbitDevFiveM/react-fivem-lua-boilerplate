@@ -3,9 +3,9 @@ import './App.css';
 import "./tailwind.css"
 
 import { useVisibility } from './core/hooks/useVisibility';
-import { useCoreService, useJsonDataService, useControlPanelService, useShowBanWeaponService } from './core/hooks/useCoreService';
+import { useCoreService, useJsonDataService, useControlPanelService } from './core/hooks/useCoreService';
 
-import { useJsonData, useControlPanel, useShowBanWeapon } from './core/hooks/useData';
+import { useJsonData, useControlPanel } from './core/hooks/useData';
 import { coreState } from './core/hooks/state';
 import { useSetRecoilState } from "recoil";
 
@@ -32,12 +32,9 @@ function App() {
   useCoreService()
   useJsonDataService()
   useControlPanelService()
-  useShowBanWeaponService()
   const jsonData = useJsonData()
   const controlPanelEnabled = useControlPanel()
-  const showBanWeapon = useShowBanWeapon()
   const setJsonDataCount = useSetRecoilState(coreState.jsonData);
-  const setShowBanWeapon = useSetRecoilState(coreState.showBanWeapon);
   const visibility = useVisibility()
 
   const { left, right } = jsonData
@@ -47,21 +44,12 @@ function App() {
   const [leftLogo, urlLeftInput] = useInput({ type: "url", defaultValue: "" });
   const [leftScore, leftScoreInput] = useInput({ type: "number", defaultValue: 0 });
   const [leftStar, leftStarInput] = useInput({ type: "number", defaultValue: 0 });
-  const [leftWood, leftWoodInput] = useInput({ type: "number", defaultValue: 0 });
-  const [leftKnuckle, leftKnuckleInput] = useInput({ type: "number", defaultValue: 0 });
-  const [leftKnife, leftKnifeInput] = useInput({ type: "number", defaultValue: 0 });
-  const [leftBottle, leftBottleInput] = useInput({ type: "number", defaultValue: 0 });
 
   const [rightLogo, urlRightInput] = useInput({ type: "url", defaultValue: "" });
   const [rightScore, rightScoreInput] = useInput({ type: "number", defaultValue: 0 });
   const [rightStar, rightStarInput] = useInput({ type: "number", defaultValue: 0 });
-  const [rightWood, rightWoodInput] = useInput({ type: "number", defaultValue: 0 });
-  const [rightKnuckle, rightKnuckleInput] = useInput({ type: "number", defaultValue: 0 });
-  const [rightKnife, rightKnifeInput] = useInput({ type: "number", defaultValue: 0 });
-  const [rightBottle, rightBottleInput] = useInput({ type: "number", defaultValue: 0 });
 
   const [statusShowUI, setStatusShowUI] = useState(false);
-  const [statusShowBanWeapon, setStatusShowBanWeapon] = useState(false);
 
   const escFunction = useCallback((event) => {
     if (event.keyCode === 27) {
@@ -80,44 +68,22 @@ function App() {
 
   const demo = (e) => {
     e.preventDefault();
-    setShowBanWeapon(true)
     setJsonDataCount({
       left: {
         score: leftScore,
         logo: leftLogo,
         star: leftStar,
-        wood: leftWood,
-        knuckle: leftKnuckle,
-        knife: leftKnife,
-        bottle: leftBottle,
       },
       right: {
         score: rightScore,
         logo: rightLogo,
         star: rightStar,
-        wood: rightWood,
-        knuckle: rightKnuckle,
-        knife: rightKnife,
-        bottle: rightBottle,
       },
     })
   };
 
-  const openBanWeapon = (e) => {
-    setStatusShowBanWeapon(true)
-    e.preventDefault();
-    send("OpenBanWeapon")
-  };
-
-  const closeBanWeapon = (e) => {
-    setStatusShowBanWeapon(false)
-    e.preventDefault();
-    send("CloseBanWeapon")
-  };
-
   const closeAll = (e) => {
     setStatusShowUI(false)
-    setStatusShowBanWeapon(false)
     e.preventDefault();
     send("Submit", {
       showUi: false,
@@ -133,19 +99,11 @@ function App() {
         score: leftScore,
         logo: leftLogo,
         star: leftStar,
-        wood: leftWood,
-        knuckle: leftKnuckle,
-        knife: leftKnife,
-        bottle: leftBottle,
       },
       right: {
         score: rightScore,
         logo: rightLogo,
         star: rightStar,
-        wood: rightWood,
-        knuckle: rightKnuckle,
-        knife: rightKnife,
-        bottle: rightBottle,
       }
     })
   };
@@ -157,7 +115,7 @@ function App() {
           <div className="flex justify-around content-center items-center w-1/3">
             {/* Logo Left */}
             <div>
-              <img className="object-scale-down h-20" src={left.logo}/>
+              <img className="object-scale-down h-16 rounded-full flex items-center justify-center" src={left.logo}/>
             </div>
             {/* Score Left */}
             <div className="flex content-center items-center">
@@ -174,7 +132,7 @@ function App() {
           <div className="flex flex-row-reverse justify-around content-center items-center w-1/3">
             {/* Logo Right */}
             <div>
-              <img className="object-scale-down h-20" src={right.logo}/>
+              <img className="object-scale-down h-16 rounded-full flex items-center justify-center" src={right.logo}/>
             </div>
             {/* Score Right */}
             <div>
@@ -197,130 +155,48 @@ function App() {
             }
           </div>
         </div>
-        {/* Weapon Block */}
-        {
-          showBanWeapon && 
-          <>
-            <div className="absolute bottom-px left-0 inset-y-1/4 mx-3 bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl h-64 px-1">
-              <h1 className="flex justify-center leading-6 mt-4" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Ban</h1>
-              <div className="justify-around justify-self-auto flex flex-row pt-2 p-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260191154831380/aaa4.png"/>
-                  <h3 className="text-white text-lg pt-1.5 pl-2">{left.wood > 0 ? left.wood : ''}</h3>
-              </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188927131668/aaa2.png"/>
-                  <h3 className="text-white text-lg pt-1.5 pl-2 stroke-current text-re  d-500">{left.knuckle > 0 ? left.knuckle : ''}</h3>
-              </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188356182036/aaa1.png"/>
-                  <h3 className="text-white text-lg pt-1.5 pl-2">{left.knife > 0 ? left.knife : ''}</h3>
-              </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260189749084180/aaa3.png"/>
-                  <h3 className="text-white text-lg pt-1.5 pl-2">{left.bottle > 0 ? left.bottle : ''}</h3>
-              </div>
-            </div>
-            <div className="absolute bottom-px right-0 inset-y-1/4 mx-3 bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl h-64 px-1">
-              <h1 className="flex justify-center leading-6 mt-4" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Ban</h1>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <h3 className="text-white text-lg pt-1.5 pr-2">{right.wood > 0 ? right.wood : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260191154831380/aaa4.png"/>
-              </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <h3 className="text-white text-lg pt-1.5 pr-2">{right.knuckle > 0 ? right.knuckle : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188927131668/aaa2.png"/>
-              </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <h3 className="text-white text-lg pt-1.5 pr-2">{right.knife > 0 ? right.knife : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260188356182036/aaa1.png"/>
-              </div>
-              <div className="justify-around justify-self-auto flex flex-row pt-1 p-1">
-                  <h3 className="text-white text-lg pt-1.5 pr-2">{right.bottle > 0 ? right.bottle : ''}</h3>
-                  <img className="h-10 w-10" src="https://cdn.discordapp.com/attachments/737530668061425735/845260189749084180/aaa3.png"/>
-              </div>
-            </div>
-
-          </>
-        }
         {/* Control Panel */}
         <div style={ controlPanelEnabled ? { visibility: 'visible' } : { visibility: 'hidden' }} className="w-full max-w-xl absolute bottom-px box-content p-4 w-2/3 right-40">
           <form className="bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h1 className="pb-8 text-white text-lg" style={{ fontWeight: "bold", fontSize: 16 }}>แผงควบคุม</h1>
+            <h1 className="pb-8 text-white text-lg font-bold">แผงควบคุม</h1>
             <div>
-              <label className="text-white text-lg">Url Logo ทีมซ้าย</label>
+              <label className="text-white text-md">Url Logo ทีมซ้าย</label>
               {urlLeftInput}
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">คะแนน ทีมซ้าย</label>
+                  <label className="text-white text-md">คะแนน ทีมซ้าย</label>
                   {leftScoreInput}
                 </div>
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">ดาว ทีมซ้าย</label>
+                  <label className="text-white text-md">ดาว ทีมซ้าย</label>
                   {leftStarInput}
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-2">
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนไม้</label>
-                  {leftWoodInput}
-                </div>
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนสนับ</label>
-                  {leftKnuckleInput}
-                </div>
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนมีด</label>
-                  {leftKnifeInput}
-                </div>
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนปากฉลาม</label>
-                  {leftBottleInput}
                 </div>
               </div>
             </div>
             <div>
-              <label className="text-white text-lg">Url Logo ทีมขวา</label>
+              <label className="text-white text-md">Url Logo ทีมขวา</label>
               {urlRightInput}
               <div className="flex flex-wrap -mx-3 mb-2">
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">คะแนน ทีมขวา</label>
+                  <label className="text-white text-md">คะแนน ทีมขวา</label>
                   {rightScoreInput}
                 </div>
                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">ดาว ทีมขวา</label>
+                  <label className="text-white text-md">ดาว ทีมขวา</label>
                   {rightStarInput}
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-2">
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนไม้</label>
-                  {rightWoodInput}
-                </div>
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนสนับ</label>
-                  {rightKnuckleInput}
-                </div>
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนมีด</label>
-                  {rightKnifeInput}
-                </div>
-                <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                  <label className="text-white text-lg">แบนปากฉลาม</label>
-                  {rightBottleInput}
                 </div>
               </div>
             </div>
             <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
               <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button" onClick={demo}>ตัวอย่าง</button>
-              {/* <div className={`banner ${active ? "active" : ""}`}>{children}</div> */}
               <button className={`bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded ${statusShowUI && "ring ring-green-200"}`} type="button" onClick={submit}>แสดงทุกคน</button>
               <button className={`bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded ${!statusShowUI && "ring ring-yellow-200"}`} type="button" onClick={closeAll}>ปิดทุกคน</button>
               <button className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="button" onClick={() => send("Close", {})}>ปิด</button>
             </div>
-            <div className="flex flex-row justify-around justify-items-center items-center content-center w-full pt-8">
-              <button className={`bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 border-b-4 border-green-800 hover:border-green-600 rounded ${statusShowBanWeapon && "ring ring-green-300"}`} type="button" onClick={openBanWeapon}>แสดงการแบนทุกคน</button>
-              <button className={`bg-red-400 hover:bg-red-300 text-white font-bold py-2 px-4 border-b-4 border-red-600 hover:border-red-400 rounded ${!statusShowBanWeapon && "ring ring-red-300"}`} type="button" onClick={closeBanWeapon}>ปิดแสดงการแบนทุกคน</button>
-            </div>
+            <br/>
+            <h3 className="text-white float-right">Free version</h3>
+            <br/>
+            <h3 className="text-white float-right text-xs">Developed by Em Adthasit</h3>
           </form>
         </div>
       </div>

@@ -6,11 +6,6 @@ export const useControlPanel = () => {
   return controlPanel
 }
 
-export const useShowBanWeapon = () => {
-  const showBanWeapon = useRecoilValue(coreState.showBanWeapon);
-  return showBanWeapon
-}
-
 export const useJsonData = () => {
   const jsonData = useRecoilValue(coreState.jsonData);
   return jsonData

@@ -9,10 +9,6 @@ export const coreState = {
     key: "coreControlHidden",
     default: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
   }),
-  showBanWeapon: atom<boolean>({
-    key: "coreShowBanWeapon",
-    default: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
-  }),
   data: atom<any>({
     key: "dataState",
     default: "EmAdthasit",
@@ -23,21 +19,13 @@ export const coreState = {
       weaponBlock: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
       right: {
         score: 3,
-        logo: "https://media.discordapp.net/attachments/811639071599755304/832920624727851008/023.png",
+        logo: "https://cdn.discordapp.com/attachments/832994803922239569/846760132817453106/FiveM-Emblem.png",
         star: 2,
-        wood: 0,
-        knuckle: 0,
-        knife: 0,
-        bottle: 0,
       },
       left: {
         score: 3,
-        logo: "https://cdn.discordapp.com/attachments/775913267079544842/843907074874408990/JAK.png",
+        logo: "https://cdn.discordapp.com/attachments/832994803922239569/843880835584622612/rabbit_logo.png",
         star: 3,
-        wood: 0,
-        knuckle: 0,
-        knife: 0,
-        bottle: 0,
       }
     },
   }),
