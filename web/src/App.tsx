@@ -119,14 +119,14 @@ function App() {
             </div>
             {/* Score Left */}
             <div className="flex content-center items-center">
-              <h1 style={{ fontSize: 50, color: '#FFF', fontWeight: "bold"}}>{left.score}</h1>
+              <h1 className="text-white text-4xl font-bold">{left.score}</h1>
             </div>
           </div>
           {/* Center */}
           <div className="flex flex-col justify-center justify-items-center items-center content-center w-1/2">
-            <h1 className="flex justify-center leading-6" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Crown of King 2021</h1>
-            <h1 className="flex justify-center leading-6" style={{ fontSize: 26, fontWeight: "bold", color: '#FFF'}}>Qualifiers Day 6</h1>
-            <h1 className="flex justify-center leading-6" style={{ fontSize: 18, fontWeight: 600, color: '#FFF'}}>Familie City</h1>
+            <h1 className="flex justify-center leading-6 text-white text-sm font-semibold">{jsonData.title}</h1>
+            <h1 className="flex justify-center leading-6 text-white text-lg font-bold">{jsonData.title2}</h1>
+            <h1 className="flex justify-center leading-6 text-white text-sm font-semibold">{jsonData.title3}</h1>
           </div>
           {/* Right */}
           <div className="flex flex-row-reverse justify-around content-center items-center w-1/3">
@@ -137,7 +137,7 @@ function App() {
             {/* Score Right */}
             <div>
               <div className="flex content-center items-center">
-                <h1 style={{ fontSize: 50, color: '#FFF', fontWeight: "bold"}}>{right.score}</h1>
+                <h1 className="text-white text-4xl font-bold">{right.score}</h1>
               </div>
             </div>
           </div>
