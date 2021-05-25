@@ -2,7 +2,6 @@ local focus = false
 local isDead = false
 local showControl = false
 local showUI = false
-local showBanWeapon = false
 
 Citizen.CreateThread(function()
   while(true) do
@@ -18,7 +17,7 @@ Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(1)
-            if IsControlJustReleased(1, 19) then
+            if IsControlJustReleased(1, Config.FocusControl) then
               Citizen.Wait(300)
               if showControl then
                 if not focus then
@@ -30,7 +29,7 @@ Citizen.CreateThread(
               end
             end
 
-            if IsControlJustReleased(1, 167) then
+            if Config.MenuControlEnable and  IsControlJustReleased(1, Config.MenuControl) then
               Citizen.Wait(300)
               if not showControl then
                 control()
@@ -38,19 +37,19 @@ Citizen.CreateThread(
                 close()
               end
             end
-
-            if IsControlJustReleased(1, 170) then
-              Citizen.Wait(300)
-              if not showUI then
-                show()
-                showBanWeaponUI()
-              else
-                close()
-              end
-            end
         end
     end
 )
+
+RegisterNetEvent('rabbit-score:cl:openmenu')
+AddEventHandler('rabbit-score:cl:openmenu', function()
+  Citizen.Wait(300)
+  if not showControl then
+    control()
+  else
+    close()
+  end
+end)
 
 RegisterNetEvent('rabbit-score:cl:Submit')
 AddEventHandler('rabbit-score:cl:Submit', function(data)
@@ -64,23 +63,18 @@ AddEventHandler('rabbit-score:cl:Submit', function(data)
       app = "REACTNUI",
       method = "setJsonData",
       data = {
+        title=data.title,
+        title2=data.title2,
+        title3=data.title3,
         right={
           score=data.right.score,
           logo=data.right.logo,
           star=data.right.star,
-          wood=data.right.wood,
-          knuckle=data.right.knuckle,
-          knife=data.right.knife,
-          bottle=data.right.bottle,
         },
         left={
           score=data.left.score,
           logo=data.left.logo,
           star=data.left.star,
-          wood=data.left.wood,
-          knuckle=data.left.knuckle,
-          knife=data.left.knife,
-          bottle=data.left.bottle,
         }
       }
     })
@@ -103,42 +97,6 @@ RegisterNUICallback("Close", function(data, cb)
   cb('OK')
 end)
 
-function showBanWeaponUI ()
-  showBanWeapon = true
-  SendNUIMessage({
-    app = "REACTNUI",
-    method = "setShowBanWeapon",
-    data = showBanWeapon
-  })
-end
-
-function closeBanWeapon ()
-  showBanWeapon = false
-  SendNUIMessage({
-    app = "REACTNUI",
-    method = "setShowBanWeapon",
-    data = showBanWeapon
-  })
-end
-
-RegisterNUICallback("OpenBanWeapon", function(data, cb)
-  TriggerServerEvent('rabbit-score:sv:showBanWeapon')
-end)
-
-RegisterNetEvent('rabbit-score:cl:showBanWeapon')
-AddEventHandler('rabbit-score:cl:showBanWeapon', function()
-  showBanWeaponUI()
-end)
-
-RegisterNUICallback("CloseBanWeapon", function(data, cb)
-  TriggerServerEvent('rabbit-score:sv:closeBanWeapon')
-end)
-
-RegisterNetEvent('rabbit-score:cl:closeBanWeapon')
-AddEventHandler('rabbit-score:cl:closeBanWeapon', function()
-  closeBanWeapon()
-end)
-
 RegisterNUICallback("Focus", function(data, cb)
   if focus then
     SetNuiFocus( false, false )
@@ -152,7 +110,6 @@ function control ()
   showControl = true
   focus = true
   showUI = true
-  showBanWeapon = true
   SetNuiFocus( true, true )
   SendNUIMessage({
     app = "REACTNUI",
@@ -162,11 +119,6 @@ function control ()
   SendNUIMessage({
     app = "REACTNUI",
     method = "setControlPanel",
-    data = true
-  })
-  SendNUIMessage({
-    app = "REACTNUI",
-    method = "setShowBanWeapon",
     data = true
   })
 end
@@ -184,7 +136,6 @@ function close ()
   showControl = false
   focus = false
   showUI = false
-  showBanWeapon = false
   SetNuiFocus( false, false )
   SendNUIMessage({
     app = "REACTNUI",
@@ -194,11 +145,6 @@ function close ()
   SendNUIMessage({
     app = "REACTNUI",
     method = "setControlPanel",
-    data = false
-  })
-  SendNUIMessage({
-    app = "REACTNUI",
-    method = "setShowBanWeapon",
     data = false
   })
 end

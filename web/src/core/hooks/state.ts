@@ -16,9 +16,9 @@ export const coreState = {
   jsonData: atom<any>({
     key: "jsonState",
     default: {
-      title: "Crown of King 2021",
-      title2: "Qualifiers",
-      title3: "Familie City",
+      title: "Free Version",
+      title2: "Rabbit-Score",
+      title3: "Rabbit-Dev",
       right: {
         score: 3,
         logo: "https://cdn.discordapp.com/attachments/832994803922239569/846760132817453106/FiveM-Emblem.png",

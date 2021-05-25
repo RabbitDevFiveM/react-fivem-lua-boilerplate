@@ -41,6 +41,10 @@ function App() {
 
   const { send } = useNuiRequest();
 
+  const [title, titleInput] = useInput({ type: "text", defaultValue: "" });
+  const [title2, title2Input] = useInput({ type: "text", defaultValue: "" });
+  const [title3, title3Input] = useInput({ type: "text", defaultValue: "" });
+
   const [leftLogo, urlLeftInput] = useInput({ type: "url", defaultValue: "" });
   const [leftScore, leftScoreInput] = useInput({ type: "number", defaultValue: 0 });
   const [leftStar, leftStarInput] = useInput({ type: "number", defaultValue: 0 });
@@ -124,9 +128,9 @@ function App() {
           </div>
           {/* Center */}
           <div className="flex flex-col justify-center justify-items-center items-center content-center w-1/2">
-            <h1 className="flex justify-center leading-6 text-white text-sm font-semibold">{jsonData.title}</h1>
-            <h1 className="flex justify-center leading-6 text-white text-lg font-bold">{jsonData.title2}</h1>
-            <h1 className="flex justify-center leading-6 text-white text-sm font-semibold">{jsonData.title3}</h1>
+            <h1 className="flex justify-center leading-6 text-white text-md font-semibold">{jsonData.title}</h1>
+            <h1 className="flex justify-center leading-6 text-white text-xl font-bold">{jsonData.title2}</h1>
+            <h1 className="flex justify-center leading-6 text-white text-md font-semibold">{jsonData.title3}</h1>
           </div>
           {/* Right */}
           <div className="flex flex-row-reverse justify-around content-center items-center w-1/3">
@@ -159,6 +163,20 @@ function App() {
         <div style={ controlPanelEnabled ? { visibility: 'visible' } : { visibility: 'hidden' }} className="w-full max-w-xl absolute bottom-px box-content p-4 w-2/3 right-40">
           <form className="bg-gradient-to-r from-gray-800 to-black border-2 rounded-3xl shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <h1 className="pb-8 text-white text-lg font-bold">แผงควบคุม</h1>
+            <div>
+              <label className="text-white text-md">Text (บนสุด)</label>
+              {titleInput}
+              <div className="flex flex-wrap -mx-3 mb-2">
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label className="text-white text-md">Text (กลาง)</label>
+                  {title2Input}
+                </div>
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className="text-white text-md">Text (ล่าง)</label>
+                  {title3Input}
+                </div>
+              </div>
+            </div>
             <div>
               <label className="text-white text-md">Url Logo ทีมซ้าย</label>
               {urlLeftInput}
