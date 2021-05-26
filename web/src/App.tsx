@@ -73,6 +73,9 @@ function App() {
   const demo = (e) => {
     e.preventDefault();
     setJsonDataCount({
+      title: title,
+      title2: title2,
+      title3: title3,
       left: {
         score: leftScore,
         logo: leftLogo,
@@ -99,6 +102,9 @@ function App() {
     e.preventDefault();
     send("Submit", {
       showUi: true,
+      title: title,
+      title2: title2,
+      title3: title3,
       left: {
         score: leftScore,
         logo: leftLogo,
